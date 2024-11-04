@@ -8,7 +8,10 @@
 import UIKit
 
 class ReminderListViewController: UICollectionViewController {
+    // DataSource의 유형을 Int(섹션), String(아이템)으로 설정하는 타입 별칭
     typealias DataSource = UICollectionViewDiffableDataSource<Int, String>
+    // SnapShot의 유형을 Int(섹션), String(아이템)으로 설정하는 타입 별칭
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, String>
     
     var dataSource: DataSource!
     
@@ -36,8 +39,23 @@ class ReminderListViewController: UICollectionViewController {
             (collectionView: UICollectionView, IndexPath: IndexPath, itemIdentifier: String) in
             // 설정된 셀 등록을 통해 셀 재사용 및 반환
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: IndexPath, item: itemIdentifier)
-            
         }
+        
+        // 스냅샷을 생성하고, 초기 데이터로 구성
+        var snapshot = SnapShot()
+        snapshot.appendSections([0])
+        // Reminder 객체의 제목들을 아이템으로 추가
+        snapshot.appendItems(Reminder.sampleData.map { $0.title })
+//        아래 코드 == 위 코드 줄이기 전 코드
+//        var remiderTitles = [String]()
+//        for reminder in Reminder.sampleData {
+//            remiderTitles.append(reminder.title)
+//        }
+//        snapshot.appendItems(remiderTitles)
+        // 스냅샷을 데이터 소스에 적용하여 컬렉션 뷰에 표시되도록 함
+        dataSource.apply(snapshot)
+        // 데이터 소스를 컬렉션 뷰의 dataSource로 설정
+        collectionView.dataSource = dataSource
     }
     private func listLayout() -> UICollectionViewCompositionalLayout {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)

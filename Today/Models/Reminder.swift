@@ -12,7 +12,7 @@ struct Reminder {
     var title: String
     var dueDate: Date
     var notes: String? = nil
-    // 이 변수는 'String' 타입의 옵셔널 변수이며, 초기값으로 'nil'을 가집니다.
+    // notes는 'String' 타입의 옵셔널 변수이며, 초기값으로 'nil'을 가집니다.
     // 즉,'notes'는 현재 값을 가지고 있지 않음을 의미하며,
     // 나중에 문자열 값이 할당될 수도 있습니다.
     var isComplete: Bool = false
