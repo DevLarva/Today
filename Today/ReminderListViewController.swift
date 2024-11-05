@@ -8,9 +8,8 @@
 import UIKit
 
 class ReminderListViewController: UICollectionViewController {
-    // DataSource의 유형을 Int(섹션), String(아이템)으로 설정하는 타입 별칭
+    // DataSource, snapShot의 유형을 Int, String으로 설정하는 타입 별칭
     typealias DataSource = UICollectionViewDiffableDataSource<Int, String>
-    // SnapShot의 유형을 Int(섹션), String(아이템)으로 설정하는 타입 별칭
     typealias SnapShot = NSDiffableDataSourceSnapshot<Int, String>
     
     var dataSource: DataSource!
