@@ -18,5 +18,9 @@ extension ReminderListViewController {
         contentConfiguration.secondaryText = reminder.dueDate.dayAndTimeText
         contentConfiguration.secondaryTextProperties.font = UIFont.preferredFont(forTextStyle: .caption1)
         cell.contentConfiguration = contentConfiguration
+        // listGroupedCell()는 iOS 18.0 부터는 rename == listCell()
+        var backgroundConfiguration = UIBackgroundConfiguration.listCell()
+        backgroundConfiguration.backgroundColor = .todayListCellBackground
+        cell.backgroundConfiguration = backgroundConfiguration
     }
 }
