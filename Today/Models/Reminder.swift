@@ -19,6 +19,15 @@ struct Reminder: Identifiable {
     var isComplete: Bool = false
 }
 
+extension [Reminder] {
+    func indexOfReminder(withId id: Reminder.ID) -> Self.Index {
+        guard let index = firstIndex(where: { $0.id == id }) else {
+            fatalError("Reminder with id: \(id) not found")
+        }
+        return index
+    }
+}
+
 #if DEBUG
 //#if DEBUG와 #endif 사이의 코드는 디버그 빌드에서만 활성화됩니다.
 extension Reminder {

@@ -19,7 +19,7 @@ extension ReminderListViewController {
             UICollectionViewListCell, indexPath: IndexPath, id: Reminder.ID
     ) {
         // 인덱스에 해당하는 객체 가져오기
-        let reminder = reminders[indexPath.item]
+        let reminder = reminder(withID: id)
         // 셀의 기본 콘텐츠 설정 생성
         var contentConfiguration = cell.defaultContentConfiguration()
         contentConfiguration.text = reminder.title
@@ -41,6 +41,16 @@ extension ReminderListViewController {
         backgroundConfiguration.backgroundColor = .todayListCellBackground
         // 배경색 적용
         cell.backgroundConfiguration = backgroundConfiguration
+    }
+    // remider 배열에서 해당 알림을 반환하는 메서드
+    func reminder(withID id: Reminder.ID) -> Reminder {
+        let index = reminders.indexOfReminder(withId: id)
+        return reminders[index]
+    }
+    // 알림 업데이트 메서드
+    func updateReminder(_ reminder: Reminder) {
+        let index = reminders.indexOfReminder(withId: reminder.id)
+        reminders[index] = reminder
     }
     
     // 완료 버튼의 구성 반환 메서드
