@@ -8,7 +8,7 @@
 import Foundation
 
 extension Date {
-    // 현재 날짜를 "날짜 및 시간" 형태의 문자열로 변환해 반환해주는 계산
+    // 현재 날짜를 "날짜 및 시간" 형태의 문자열로 변환해 반환
     
     var dayAndTimeText: String {
         // 커스텀 포맷을 사용해 날짜 및 시간 문자열 생성

@@ -10,13 +10,16 @@
 import UIKit
 
 extension ReminderListViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, String>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, String>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Reminder.ID>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, Reminder.ID>
     
     // 셀을 구성할때 사용하는 핸들러 메서드
-    func cellRegistrationHandler(cell: UICollectionViewListCell, indexPath: IndexPath, id: String) {
+    func cellRegistrationHandler(
+        cell:
+            UICollectionViewListCell, indexPath: IndexPath, id: Reminder.ID
+    ) {
         // 인덱스에 해당하는 객체 가져오기
-        let reminder = Reminder.sampleData[indexPath.item]
+        let reminder = reminders[indexPath.item]
         // 셀의 기본 콘텐츠 설정 생성
         var contentConfiguration = cell.defaultContentConfiguration()
         contentConfiguration.text = reminder.title

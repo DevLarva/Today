@@ -13,6 +13,8 @@ class ReminderListViewController: UICollectionViewController {
 //    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, String>
     
     var dataSource: DataSource!
+    // 샘플 데이터로 배열 초기화
+    var reminders: [Reminder] = Reminder.sampleData
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,7 @@ class ReminderListViewController: UICollectionViewController {
 //        }
         // 데이터 소스 초기화: 컬렉션 뷰와 셀 등록 클로저를 이용해 구성
         dataSource = DataSource(collectionView: collectionView) {
-            (collectionView: UICollectionView, IndexPath: IndexPath, itemIdentifier: String) in
+            (collectionView: UICollectionView, IndexPath: IndexPath, itemIdentifier: Reminder.ID) in
             // 설정된 셀 등록을 통해 셀 재사용 및 반환
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: IndexPath, item: itemIdentifier)
         }
@@ -47,7 +49,7 @@ class ReminderListViewController: UICollectionViewController {
         var snapshot = SnapShot()
         snapshot.appendSections([0])
         // Reminder 객체의 제목들을 아이템으로 추가
-        snapshot.appendItems(Reminder.sampleData.map { $0.title })
+        snapshot.appendItems(reminders.map { $0.id })
 //        아래 코드 == 위 코드 줄이기 전 코드
 //        var remiderTitles = [String]()
 //        for reminder in Reminder.sampleData {
