@@ -13,6 +13,20 @@ extension ReminderListViewController {
     typealias DataSource = UICollectionViewDiffableDataSource<Int, Reminder.ID>
     typealias SnapShot = NSDiffableDataSourceSnapshot<Int, Reminder.ID>
     
+    func updateSnapshot(reloading ids: [Reminder.ID] = []) {
+        // 스냅샷을 생성하고, 초기 데이터로 구성
+        var snapshot = SnapShot()
+        snapshot.appendSections([0])
+        // Reminder 객체의 제목들을 아이템으로 추가
+        snapshot.appendItems(reminders.map { $0.id })
+        // 배열이 비어 있지 않다면 스냅샷에 식별자에 대한 remider를 다시 로드
+        if  !ids.isEmpty {
+            snapshot.reloadItems(ids)
+        }
+        // 스냅샷을 데이터 소스에 적용하여 컬렉션 뷰에 표시되도록 함
+        dataSource.apply(snapshot)
+    }
+    
     // 셀을 구성할때 사용하는 핸들러 메서드
     func cellRegistrationHandler(
         cell:
@@ -57,6 +71,7 @@ extension ReminderListViewController {
         var reminder = reminder(withID: id)
         reminder.isComplete.toggle()
         updateReminder(reminder)
+        updateSnapshot(reloading: [id])
     }
     
     // 완료 버튼의 구성 반환 메서드
