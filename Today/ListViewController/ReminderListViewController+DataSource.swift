@@ -52,6 +52,12 @@ extension ReminderListViewController {
         let index = reminders.indexOfReminder(withId: reminder.id)
         reminders[index] = reminder
     }
+    // 모델에서 Remider.ID를 허용하기 위한 메서드
+    func completeReminder(withId id: Reminder.ID) {
+        var reminder = reminder(withID: id)
+        reminder.isComplete.toggle()
+        updateReminder(reminder)
+    }
     
     // 완료 버튼의 구성 반환 메서드
     private func doneButtonConfiguration(for reminder: Reminder)

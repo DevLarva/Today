@@ -8,6 +8,6 @@
 import UIKit
 
 class RemiderDoneButton: UIButton {
-    
+    var id: Reminder.ID?
 }
 
